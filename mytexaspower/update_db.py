@@ -34,10 +34,10 @@ def update_db():
     print("Updating database...")
     #DOWNLOADING CSV FROM POWERTOCHOOSE.ORG AND SAVING FILE
     THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
-    csv_output = os.path.join(THIS_FOLDER, 'mypower.csv')
+    csv_location = os.path.join(THIS_FOLDER, 'mypower.csv')
 
     url = 'http://www.powertochoose.org/en-us/Plan/ExportToCsv'
-    urllib.request.urlretrieve(url, csv_output)
+    urllib.request.urlretrieve(url, csv_location)
 
     #CONNECTING TO DB
     db_location = os.path.join(THIS_FOLDER, 'mypower.db')
@@ -48,7 +48,7 @@ def update_db():
     dbmgr.query("CREATE TABLE IF NOT EXISTS offers ('idKey' INTEGER, 'TduCompanyName', 'RepCompany', 'Product', 'kwh500' INTEGER, 'kwh1000' INTEGER, 'kwh2000' INTEGER, 'FeesCredits', 'PrePaid', 'TimeOfUse', 'Fixed', 'RateType', 'Renewable' INTEGER, 'TermValue' INTEGER, 'CancelFee', 'Website', 'SpecialTerms', 'TermsURL', 'Promotion', 'PromotionDesc', 'FactsURL', 'EnrollURL', 'PrepaidURL', 'EnrollPhone', 'NewCustomer', 'MinUsageFeesCredits');")
 
     #OPENING DOWNLOADED CSV TO SAVE IT INTO DB
-    with open('mypower.csv', 'rt') as fin:
+    with open(csv_location, 'rt') as fin:
         imported_csv = csv.DictReader(fin) # comma is default delimiter
         to_db = [(i['[idKey]'], i['[TduCompanyName]'], i['[RepCompany]'], i['[Product]'], i['[kwh500]'], i['[kwh1000]'], i['[kwh2000]'], i['[Fees/Credits]'], i['[PrePaid]'], i['[TimeOfUse]'], i['[Fixed]'], i['[RateType]'], i['[Renewable]'], i['[TermValue]'], i['[CancelFee]'], i['[Website]'], i['[SpecialTerms]'], i['[TermsURL]'], i['[Promotion]'], i['[PromotionDesc]'], i['[FactsURL]'], i['[EnrollURL]'], i['[PrepaidURL]'], i['[EnrollPhone]'], i['[NewCustomer]'], i['[MinUsageFeesCredits]']) for i in imported_csv]
 
