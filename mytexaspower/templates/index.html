@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block title %} Welcome | {{ super() }}{% endblock %}
+
+{% block body %}
+
+<div class="splash pure-g">
+    <div class="pure-u-1-24"></div>
+    <div class="pure-u-10-24">
+        <div class="l-box">
+        <h1>My Texas Power</h1>
+        <p>
+            My Texas Power is a tool to help you easily find the best electric deal available. Simply fill out this form and you'll
+            be able to compare offers by their estimated montly cost.
+
+            <h4>Features</h4>
+            <ul>
+                <li>Easily compare monthly costs</li>
+                <li>Avoid teaser rates</li>
+                <li>Free to use</li>
+            </ul>
+        </p>
+        </div>
+    </div>
+    <div class="pure-u-10-24">
+            <div class="l-box">
+                <form action="{{ url_for('save') }}" method="POST" class="pure-form pure-form-stacked">
+                    <div class="white-box">
+                    <fieldset>
+                        <h3>Input your electric needs</h3>
+
+                        <label for="usage">Your average monthly Kwh usage</label>
+                        <input name ="usage" id="usage" type="number" class="pure-input-1" value="{{ saves.get('usage', '1000') }}" min=0 max=2000 required>
+
+                        <label for="tdu">Select your TDU provider</label>
+                        <select name="tdu" id="tdu" class="pure-input-1">
+                            {% for tdu in tdus %}
+                            <option value="{{ tdu.TduCompanyName }}" {% if saves.get('tdu') == tdu.TduCompanyName %} selected="selected" {% endif %}>{{ tdu.TduCompanyName }}</option>
+                            {% endfor %}
+                        </select>
+
+                        <label for="renewable">Do you want 100% renewable energy?</label>
+                        <select name="renewable" id="renewable" class="pure-input-1">
+                            <option value=100 {% if saves.get('renewable') == "100" %} selected="selected" {% endif %}>Yes - Clean energy is important to me.</option>
+                            <option value=0 {% if saves.get('renewable') == "0" %} selected="selected" {% endif %}>No - I'm just looking for the best deal.</option>
+                        </select>
+
+                        <label for="contract">Minimum contract length (months)</label>
+                        <input name="contract" id="contract" type="number" class="pure-input-1" value="{{ saves.get('contract', '12') }}" min=0 max=48>
+                        <br>
+                        <button type="submit" class="pure-button pure-button-primary">View Offers</button>
+                    </fieldset>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

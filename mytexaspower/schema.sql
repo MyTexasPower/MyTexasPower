@@ -1,0 +1,30 @@
+CREATE TABLE IF NOT EXISTS offers (
+    'idKey' INTEGER,
+    'TduCompanyName',
+    'RepCompany',
+    'Product',
+    'kwh500' INTEGER,
+    'kwh1000' INTEGER,
+    'kwh2000' INTEGER,
+    'FeesCredits',
+    'PrePaid',
+    'TimeOfUse',
+    'Fixed',
+    'RateType',
+    'Renewable' INTEGER,
+    'TermValue' INTEGER,
+    'CancelFee',
+    'Website',
+    'SpecialTerms',
+    'TermsURL',
+    'Promotion',
+    'PromotionDesc',
+    'FactsURL',
+    'EnrollURL',
+    'PrepaidURL',
+    'EnrollPhone',
+    'NewCustomer',
+    'MinUsageFeesCredits'
+);
+
+

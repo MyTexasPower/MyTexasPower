@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+
+{% block title %} Offers | {{ super() }} {% endblock %}
+
+{% block body %}
+
+<div class="splash pure-g">
+  <div class="pure-u-2-24"></div>
+  <div class="pure-u-20-24">
+        <h1>Best offers</h1>
+          <table class="pure-table pure-table-horizontal">
+            <tr>
+              <th>Offer #</th>
+              <th>Company</th>
+              <th style="text-align: center;">Estimated Monthly Bill</th>
+              <th style="text-align: center;">Contract</th>
+              <th style="text-align: center;">Renewable</th>
+            </tr>
+          {% for offer in offers %}
+            <tr>
+              <td><a href="/offers/{{ offer.idKey }}">{{ offer.idKey }} </a> </td>
+              <td>{{ offer.RepCompany }}</td>
+              <td style="text-align: center;">${{ offer.avgPrice }}.00</td>
+              <td style="text-align: center;">{{ offer.TermValue }} Months</td>
+              <td style="text-align: center;">{{ offer.Renewable }}%</td>
+            </tr>
+          {% else %}
+            <li><em>Unbelievable.  No entries here so far</em></li>
+          {% endfor %}
+          </table>
+            <br>
+          <a class="pure-button" href="/"> Back to Search </a>
+  </div>
+  <div class="pure-u-2-24"></div>
+</div>
+{% endblock %}

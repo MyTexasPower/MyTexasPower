@@ -1,0 +1,56 @@
+<!doctype html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>My Texas Power</title>
+
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/pure-min.css" integrity="sha384-nn4HPE8lTHyVtfCBi5yW9d20FjT8BJwUXyWZT9InLYax14RDjBj46LmSztkmNP9w" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.0/build/grids-responsive-min.css">
+  </head>
+  <body>
+  <div class="pure-menu pure-menu-horizontal">
+    <a href="/" class="pure-menu-heading pure-menu-link">MyTexasPower</a>
+    <ul class="pure-menu-list">
+        <li class="pure-menu-item"><a href="/about" class="pure-menu-link">About</a></li>
+    </ul>
+  </div>
+    {% block body %}{% endblock %}
+    <div class="pure-g">
+    <div class="pure-u-1-3">
+        <div class="l-box">
+            <h3>What is a TDU?</h3>
+            <p>
+                A TDU is a Transmiision and Delivery Utility. It is the company that delivers electricity from the company that generates it to your home. If you aren't sure who your company is you can check <a href="http://quickelectricity.com/utility-providers/">here</a>
+            </p>
+        </div>
+    </div>
+    <div class="pure-u-1-3">
+        <div class="l-box">
+            <h3>How much power do I use?</h3>
+            <p>
+                Most utility companies display your average monthly Kwh usage on your account online. If you don't have a current provider your can find a calcualtor online to estimate.
+            </p>
+        </div>
+    </div>
+    <div class="pure-u-1-3">
+        <div class="l-box">
+            <h3>Feedback</h3>
+            <p>
+                MyTexasPower was created after many frustrating hours of using PowertoChoose.org with the hope of making people's lives easier. Please provide site improvement suggestions at mytexaspower@gmail.com
+            </p>
+        </div>
+    </div>
+  </div>
+  </body>
+  <div class="footer">
+     <div class="pure-u-1 u-sm-1-2">
+      <ul class="legal-links">
+        <li> <a href="https://www.github.com">GitHub Project</a></li>
+        <li> <a href="#">Contact</a> </li>
+      </ul>
+     </div>
+    </div>
+  </div>
+</html>

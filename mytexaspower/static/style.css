@@ -1,0 +1,98 @@
+h1, h2, h3, h4, h5, h6 {
+    margin: 2em 0 1em 0;
+    font-weight: 400;
+    color: #888;
+    position: relative;
+}
+
+body {
+    line-height: 1.6;
+}
+
+.l-box {
+    padding: 1em;
+}
+
+.splash {
+    background: #6fc1dc;
+    padding: 1em;
+}
+
+.splash h1{
+    color:#FAFAFA;
+}
+
+.splash h4{
+    color:#FAFAFA;
+}
+
+
+.splash p{
+    color:#FAFAFA;
+}
+
+.splash li{
+    color:#FAFAFA;
+}
+
+.white-box{
+    background: #FAFAFA;
+    padding: 1em;
+    margin: 0 auto;
+}
+
+.legal{
+    line-height: 1.6;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.legal-links {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+a {
+    color: #3b8bba;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #265778;
+}
+
+a:visited .button-enroll {
+    color: #FAFAFA;
+}
+
+p {
+    display: block;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+}
+
+th {
+    font-weight: bold;
+    text-align:left;
+}
+
+td, th {
+    display: table-cell;
+    vertical-align: inherit;
+}
+
+.pure-table tr, td, th {
+    background-color: #FAFAFA;
+}
+
+
+.footer {
+    font-size: 87.5%;
+    border-top: 1px solid #eee;
+    margin-top: 3.4286em;
+    padding: 1.1429em;
+    background: rgb(250, 250, 250);
+}

@@ -1,0 +1,3 @@
+graft mytexaspower/templates
+graft mytexaspower/static
+include mytexaspower/schema.sql
