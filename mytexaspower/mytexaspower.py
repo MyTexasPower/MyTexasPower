@@ -91,6 +91,7 @@ def avg_price(user_preferences):
     usage = int(user_preferences["usage"])
     user_id = escape(session['session_id'])
     print(usage)
+    cur.execute('BEGIN TRANSACTION')
     for row in result:
         kwh2000 = row[6]
         kwh1000 = row[5]
@@ -108,7 +109,7 @@ def avg_price(user_preferences):
 
         t = (idkey, user_id, price) ##idkey,
         db.execute('INSERT INTO user VALUES (?, ?, ?)', t)
-        db.commit()
+    db.commit()
 
 @app.route('/offers/')
 def offers():
@@ -155,4 +156,5 @@ def index():
     tdus = cur.fetchall()
     return render_template('index.html', saves=get_saved_data(), tdus=tdus)
 
-##app.run(debug=True, use_reloader=False)
+if __name__ == '__main__':
+    app.run(debug=True, use_reloader=False)
