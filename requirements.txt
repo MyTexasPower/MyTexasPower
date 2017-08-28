@@ -3,5 +3,4 @@ Flask==0.12.2
 itsdangerous==0.24
 Jinja2==2.9.6
 MarkupSafe==1.0
--e git+https://github.com/krisfield/MyTexasPower.git@b89f36d9f3113588074546a1ce1c6aae38381bc2#egg=mytexaspower
 Werkzeug==0.12.2
