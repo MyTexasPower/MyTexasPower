@@ -1,3 +1,4 @@
+import os
 import sqlite3
 import csv
 import urllib.request
@@ -32,11 +33,15 @@ def update_db():
     """Updates database"""
     print("Updating database...")
     #DOWNLOADING CSV FROM POWERTOCHOOSE.ORG AND SAVING FILE
+    THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+    csv_output = os.path.join(THIS_FOLDER, 'mypower.csv')
+
     url = 'http://www.powertochoose.org/en-us/Plan/ExportToCsv'
-    urllib.request.urlretrieve(url, 'mypower.csv')
+    urllib.request.urlretrieve(url, csv_output)
 
     #CONNECTING TO DB
-    dbmgr = DatabaseManager("mypower.db")
+    db_location = os.path.join(THIS_FOLDER, 'mypower.db')
+    dbmgr = DatabaseManager(db_location)
     dbmgr.query("DROP TABLE IF EXISTS offers")
 
     #CREATING DB TABLE IF IT DOESN'T EXIST
