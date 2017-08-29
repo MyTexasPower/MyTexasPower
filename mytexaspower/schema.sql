@@ -1,5 +1,5 @@
 CREATE TABLE IF NOT EXISTS offers (
-    'idKey' INTEGER,
+    'idKey',
     'TduCompanyName',
     'RepCompany',
     'Product',

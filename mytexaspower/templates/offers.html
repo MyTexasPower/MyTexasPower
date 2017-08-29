@@ -10,22 +10,22 @@
         <h1>Best offers</h1>
           <table class="pure-table pure-table-horizontal">
             <tr>
-              <th>Offer #</th>
+              <th>Offer</th>
               <th>Company</th>
               <th style="text-align: center;">Estimated Monthly Bill</th>
               <th style="text-align: center;">Contract</th>
               <th style="text-align: center;">Renewable</th>
+              <th>Customers</th>
             </tr>
           {% for offer in offers %}
             <tr>
-              <td><a href="/offers/{{ offer.idKey }}">{{ offer.idKey }} </a> </td>
-              <td>{{ offer.RepCompany }}</td>
-              <td style="text-align: center;">${{ offer.avgPrice }}.00</td>
-              <td style="text-align: center;">{{ offer.TermValue }} Months</td>
-              <td style="text-align: center;">{{ offer.Renewable }}%</td>
+              <td><a href="/offers/{{ offer[0] }}">{{ offer[0] }}</a> </td>
+              <td>{{ offer[1]}}</td>
+              <td style="text-align: center;"> ${{ offer[6] }}0 </td>
+              <td style="text-align: center;">{{ offer[2] }} Months</td>
+              <td style="text-align: center;">{{ offer[3] }} %</td>
+              <td>{% if offer[5] == 'TRUE' %} New customers only {% else %} {% endif %}</td>
             </tr>
-          {% else %}
-            <li><em>Unbelievable.  No entries here so far</em></li>
           {% endfor %}
           </table>
             <br>

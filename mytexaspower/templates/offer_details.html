@@ -8,46 +8,46 @@
 <div class="pure-u-2-24">
 </div>
 <div class="pure-u-20-24">
-  {% for detail in details %}
   <h1>Offer Details</h1>
-    <a class="pure-button pure-button-primary" href={{detail.EnrollURL}}> Enroll Here </a>
-    <a class="pure-button" href={{detail.FactsURL}}> View Facts Label</a> <br> <br>
+    <a class="pure-button pure-button-primary" href={{detail[21]}}> Enroll Here </a>
+    <a class="pure-button" href={{detail[20]}}> View Facts Label</a> <br> <br>
   <table class="pure-table pure-table-horizontal">
     <tr>
       <th>Plan</th>
-      <td>{{ detail.Product }} (ID #{{ detail.idKey }})</td>
+      <td>{{ detail[3] }} (ID# {{ detail[0] }})</td>
     <tr>
     <tr>
       <th>Company</th>
-      <td>{{ detail.RepCompany }}</td>
+      <td>{{ detail[2] }}</td>
     </tr>
     <tr>
       <th>Renewable</th>
-      <td>This plan uses {{ detail.Renewable }}% renewable energy</td>
+      <td>This plan uses {{ detail[12] }}% renewable energy</td>
     <tr>
     <tr>
       <th>Monthly Bill</th>
-      <td>${{ detail.avgPrice }}.00*</td>
+      <td>${{ detail[26] }}0*</td>
+    <tr>
+    <tr>
+      <th>Price/kWh</th>
+      <td><b>500 kWh:</b> ${{ detail[4] }}  <b>1000 kWh:</b> ${{ detail[5] }}  <b>2000 kWh:</b> ${{ detail[6] }} ({{ detail[11] }} Rate)</td>
     <tr>
     <tr>
       <th>Contract</th>
-      <td>{{ detail.TermValue }} Months</td>
+      <td>{{ detail[13] }} Months</td>
     </tr>
     <tr>
       <th>Cancellation Fee</th>
-      <td>{{ detail.CancelFee }}</td>
+      <td>{{ detail[14] }}</td>
     </tr>
     <tr>
-      <th>New Customers Only?</th>
-      <td>{{ detail.NewCustomer }}</td>
+      <th>Customers</th>
+      <td>{% if detail[24] == 'TRUE' %} New customers only {% else %} Anyone {% endif %}</td>
     </tr>
     <tr>
       <th>Special Terms</th>
-      <td>{{ detail.SpecialTerms }}</td>
+      <td>{{ detail[16] }}</td>
     </tr>
-  {% else %}
-    <li><em>Unbelievable.  No entries here so far</em></li>
-  {% endfor %}
   </table>
   <br>
   <a class="pure-button" href="/offers/"> Back to Results </a>

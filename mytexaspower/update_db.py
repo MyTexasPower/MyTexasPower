@@ -20,12 +20,6 @@ class DatabaseManager(object):
     self.conn.commit()
     return self.cur
 
-  def fetchall(self):
-    return self.cur.fetchall()
-
-  def fetchone(self):
-    return self.cur.fetchone()
-
   def __del__(self):
     self.conn.close()
 
@@ -43,6 +37,7 @@ def update_db():
     db_location = os.path.join(THIS_FOLDER, 'mypower.db')
     dbmgr = DatabaseManager(db_location)
     dbmgr.query("DROP TABLE IF EXISTS offers")
+    dbmgr.query("DROP TABLE IF EXISTS user")
 
     #CREATING DB TABLE IF IT DOESN'T EXIST
     dbmgr.query("CREATE TABLE IF NOT EXISTS offers ('idKey' INTEGER, 'TduCompanyName', 'RepCompany', 'Product', 'kwh500' INTEGER, 'kwh1000' INTEGER, 'kwh2000' INTEGER, 'FeesCredits', 'PrePaid', 'TimeOfUse', 'Fixed', 'RateType', 'Renewable' INTEGER, 'TermValue' INTEGER, 'CancelFee', 'Website', 'SpecialTerms', 'TermsURL', 'Promotion', 'PromotionDesc', 'FactsURL', 'EnrollURL', 'PrepaidURL', 'EnrollPhone', 'NewCustomer', 'MinUsageFeesCredits');")
