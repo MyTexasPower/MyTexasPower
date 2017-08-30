@@ -12,18 +12,18 @@
             <tr>
               <th>Offer</th>
               <th>Company</th>
-              <th style="text-align: center;">Estimated Monthly Bill</th>
+              <th style="text-align: center;"><a href="/about#monthlybill" target="_blank">Monthly Bill*</a></th>
               <th style="text-align: center;">Contract</th>
               <th style="text-align: center;">Renewable</th>
               <th>Customers</th>
             </tr>
           {% for offer in offers %}
             <tr>
-              <td><a href="/offers/{{ offer[0] }}">{{ offer[0] }}</a> </td>
+              <td><a href="/offers/{{ offer[0] }}"><b>{{ offer[0] }}</b></a> </td>
               <td>{{ offer[1]}}</td>
               <td style="text-align: center;"> ${{ offer[6] }}0 </td>
               <td style="text-align: center;">{{ offer[2] }} Months</td>
-              <td style="text-align: center;">{{ offer[3] }} %</td>
+              <td style="text-align: center;">{% if offer[3] %} {{ offer[3] }}% {% else %} Unknown {% endif %}</td>
               <td>{% if offer[5] == 'TRUE' %} New customers only {% else %} {% endif %}</td>
             </tr>
           {% endfor %}

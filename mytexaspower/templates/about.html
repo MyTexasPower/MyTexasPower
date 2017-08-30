@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block title %} About | {{ super() }} {% endblock %}
+
+{% block body %}
+
+<div class="pure-g">
+<div class="pure-u-2-24"></div>
+<div class="pure-u-20-24">
+<h2>Why did you make this?</h2>
+<p>You may be asking why this site is needed when powertochoose.org already exists. While PowerToChoose has the all relevant data for texas electric plans it displays this data in a way which is unhelpful at best and more often misleading. PowerToChoose compares plans by their avg price per kWh at 500 kWh, 1000 kWh, and 2000 kWh. Comparing plans like this allows companies to set price points which look cheap in PowerToChoose search results but in reality lead to a high electric bills. MyTexasPower puts electric plans on an even playing field by comparing them using their estimated average monthly bill. After what we really care about is "How much will it cost each month?".</p>
+
+<h2 id="monthlybill">Estimating Monthly Bill</h2>
+<p>The estimated average monthly bill value displayed in MyTexasPower search results is calculated using your average monthly usage and each plans's average cost per kWh per their <a href="https://www.puc.texas.gov/industry/electric/rates/facts/efl_brochure.pdf" target="_blank"> Electric Facts Label</a>. See below for an example of this calculation</p>
+<p>
+<code>
+<b>Your average kWh use</b> = 1200 kWh<br><br>
+<u>Plan X's cost per kWh:</u> <br>
+<b>500 kWh</b> = 8.5¢<br>
+<b>1000 kWh</b> = 6.9¢<br>
+<b>2000 kWh</b> = 9.9¢<br><br>
+
+<b>Estimated monthly bill*</b> = ((1200-1000) * .099) + (500 * .069) + (500 * .085)<br>
+</code>
+* rounded to nearest dollar
+</p>
+
+<h2>Transparency</h2>
+<p>This site is open source and can be found at <a href="https://github.com/krisfield/MyTexasPower"> Github MyTexasPower repo </a>. We want this site to make finding an electric provider as straight forward as possible if you have any comments on how to improve the site please send them to <a href="mailto:mytexaspower@gmail.com?Subject=MyTexasPower%20Feedback" target="_top">mytexaspower@gmail.com</a></p>
+</div>
+<div class="pure-u-2-24"> </div>
+</div>
+{% endblock %}

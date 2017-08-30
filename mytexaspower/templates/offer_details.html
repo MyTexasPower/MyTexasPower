@@ -9,8 +9,8 @@
 </div>
 <div class="pure-u-20-24">
   <h1>Offer Details</h1>
-    <a class="pure-button pure-button-primary" href={{detail[21]}}> Enroll Here </a>
-    <a class="pure-button" href={{detail[20]}}> View Facts Label</a> <br> <br>
+    <a class="pure-button pure-button-primary" href={{detail[21]}} target="_blank"> Enroll Here </a>
+    <a class="pure-button" href={{detail[20]}} target="_blank"> View Facts Label</a> <br> <br>
   <table class="pure-table pure-table-horizontal">
     <tr>
       <th>Plan</th>
@@ -22,11 +22,11 @@
     </tr>
     <tr>
       <th>Renewable</th>
-      <td>This plan uses {{ detail[12] }}% renewable energy</td>
+      <td>This plan uses {% if detail[12] %} {{ detail[12] }}% {% else %} an unknown amount of {% endif %} renewable energy</td>
     <tr>
     <tr>
-      <th>Monthly Bill</th>
-      <td>${{ detail[26] }}0*</td>
+      <th><a href="/about#monthlybill" target="_blank">Avg Bill*</a></th>
+      <td>${{ detail[26] }}0</td>
     <tr>
     <tr>
       <th>Price/kWh</th>

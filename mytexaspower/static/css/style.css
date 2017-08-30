@@ -9,6 +9,31 @@ body {
     line-height: 1.6;
 }
 
+.wrap {
+  background: #6fc1dc;
+  margin: 30px auto 120px;
+  max-width: 885px;
+  border: 1px solid #E6E6E6;
+  border-bottom: 0;
+}
+.wrap.no-bottom {
+    margin-bottom: 0;
+}
+
+.messages {
+    border: 0;
+    background: #dca66f;
+}
+
+.messages li {
+    color: #fff;
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    letter-spacing: 0.025em;
+    text-align: center;
+}
+
 .l-box {
     padding: 1em;
 }

@@ -90,7 +90,7 @@ def offers():
     t = list(top10.keys())
 
     if top10:
-        cur = db.execute('SELECT idKey, RepCompany, TermValue, Renewable, RateType, NewCustomer FROM offers WHERE idKey IN (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', t)
+        cur = db.execute('SELECT idKey, RepCompany, TermValue, Renewable, RateType, NewCustomer FROM offers WHERE idKey IN ({})'.format(', '.join('?' for _ in t)), t)
         offers = cur.fetchall()
 
         offer_list = []
@@ -101,6 +101,7 @@ def offers():
         sorted_offers = sorted(offer_list, key=operator.itemgetter(6))
         return render_template('offers.html', offers=sorted_offers, saves=saves)
     else:
+        flash("Electric preferences need to be input before viewing offers")
         return redirect("/")
 
 @app.route('/offers/<int:idKey>/')
@@ -117,11 +118,11 @@ def view_offer(idKey):
         offer_data = list(offer) + [top10[str(offer[0])]]
         return render_template("offer_details.html", detail=offer_data, **context)
     else:
+        flash("Electric preferences need to be input before viewing offer details")
         return redirect("/")
 
 @app.route('/save', methods=['GET', 'POST']) ##method only accesible if your post to it
 def save():
-    flash("Alright: That looks great!")
     if 'session_id' in session:
         pass
     else:
@@ -138,6 +139,10 @@ def save():
         return response
     else:
         print("DEBUG: save() GET method was called")
+
+@app.route('/about/')
+def about():
+    return render_template('about.html')
 
 @app.route('/')
 def index():
