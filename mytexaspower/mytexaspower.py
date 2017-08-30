@@ -140,7 +140,7 @@ def save():
     else:
         print("DEBUG: save() GET method was called")
 
-@app.route('/about')
+@app.route('/about/')
 def about():
     return render_template('about.html')
 
