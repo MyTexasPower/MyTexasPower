@@ -54,6 +54,7 @@ def update_db():
         dbmgr.query('DELETE FROM offers WHERE "idKey"="END OF FILE";')
     #COMMITING CHANGES AND CLOSING CONNECTION
     del dbmgr
+    os.remove(csv_location)
     print("Database updated")
 
 update_db()
