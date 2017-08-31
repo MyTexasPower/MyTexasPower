@@ -25,7 +25,7 @@
             <form action="{{ url_for('save') }}" method="POST" class="pure-form pure-form-stacked">
                 <div class="white-box">
                 <fieldset>
-                    <h3>Input your electric needs</h3>
+                    <h2>Input your electric needs</h2>
 
                     <label for="usage">Your average monthly kWh usage</label>
                     <input name ="usage" id="usage" type="number" class="pure-input-1" value="{{ saves.get('usage', '1000') }}" min=0 max=2000 required>
