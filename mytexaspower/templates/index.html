@@ -9,7 +9,7 @@
         <div class="l-box">
         <h1>My Texas Power</h1>
         <p>
-            Welcome to My Texas Power, a tool that allows you to easily compare electric plans by how much they will cost each month. Simply fill out the form to the right to get stated.
+            Welcome to My Texas Power, a tool that allows you to easily compare electric plans by how much they will cost each month. Simply fill out this form to get stated.
 
             <h4><u>Features</u></h4>
             <ul>
@@ -30,7 +30,7 @@
                     <label for="usage">Your average monthly kWh usage</label>
                     <input name ="usage" id="usage" type="number" class="pure-input-1" value="{{ saves.get('usage', '1000') }}" min=0 max=2000 required>
 
-                    <label for="tdu">Select your TDU provider</label>
+                    <label for="tdu">Select your <a href="http://quickelectricity.com/utility-providers/" target="_blank">TDU</a> provider</label>
                     <select name="tdu" id="tdu" class="pure-input-1">
                         {% for tdu in tdus %}
                         <option value="{{ tdu.TduCompanyName }}" {% if saves.get('tdu') == tdu.TduCompanyName %} selected="selected" {% endif %}>{{ tdu.TduCompanyName }}</option>
@@ -74,7 +74,7 @@
         <div class="l-box">
             <h3>Feedback</h3>
             <p>
-                MyTexasPower was created after many frustrating hours of using PowertoChoose.org with the hope of making people's lives easier. Please provide site improvement suggestions at <a href="mailto:mytxpower@gmail.com?Subject=MyTexasPower%20Feedback" target="_top">MyTXPower@gmail.com</a>
+                MyTexasPower was created after many frustrating hours of using PowertoChoose.org with the hope of making people's lives easier. Please provide site improvement suggestions at <a href="mailto:mytxpower@gmail.com?Subject=MyTexasPower%20Feedback" target="_top">mytxpower@gmail.com</a>
             </p>
         </div>
     </div>
