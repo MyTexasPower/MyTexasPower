@@ -140,6 +140,10 @@ def index():
     tdus = cur.fetchall()
     return render_template('index.html', saves=get_saved_data('user'), tdus=tdus)
 
+@app.route('/sitemap/')
+def sitemap():
+    return render_template('sitemap.html')
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
@@ -149,5 +153,4 @@ def page_not_found(e):
     return render_template('500.html'), 500
 
 if __name__ == '__main__':
-    app.run()
-    #debug=True, use_reloader=False
+    app.run(debug=True, use_reloader=False)
