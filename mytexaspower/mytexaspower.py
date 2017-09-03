@@ -6,7 +6,9 @@ import sqlite3
 import urllib.request
 
 from flask import Flask, request, session, g, redirect, make_response, url_for, abort, escape, render_template, flash
+from passwords import SENTRY_DSN
 
+client = Client(SENTRY_DSN) #add debugging
 app = Flask(__name__) # create application instance
 app.config.from_object(__name__) # load confi from this file, app.py
 
@@ -18,16 +20,9 @@ app.config.update(dict(
 
 app.config.from_envvar('MYPOWER_SETTINGS', silent=True) ##loads settings if exist, doesn't complain if they don't
 
-def get_saved_data():
+def get_saved_data(arg):
     try:
-        data = json.loads(request.cookies.get('user'))
-    except TypeError:
-        data = {}
-    return data
-
-def get_offers():
-    try:
-        data = json.loads(request.cookies.get('offers'))
+        data = json.loads(request.cookies.get(arg))
     except TypeError:
         data = {}
     return data
@@ -85,10 +80,9 @@ def avg_price(user_preferences):
 @app.route('/offers/')
 def offers():
     db = get_db()
-    saves = get_saved_data()
-    top10 = get_offers()
+    saves = get_saved_data('user')
+    top10 = get_saved_data('offers')
     t = list(top10.keys())
-
     if top10:
         cur = db.execute('SELECT idKey, RepCompany, TermValue, Renewable, RateType, NewCustomer FROM offers WHERE idKey IN ({})'.format(', '.join('?' for _ in t)), t)
         offers = cur.fetchall()
@@ -101,35 +95,29 @@ def offers():
         sorted_offers = sorted(offer_list, key=operator.itemgetter(6))
         return render_template('offers.html', offers=sorted_offers, saves=saves)
     else:
-        flash("Electric preferences need to be input before viewing offers")
+        flash("No offers meet your search criteria. Please update your search and try again.")
         return redirect("/")
 
 @app.route('/offers/<int:idKey>/')
 def view_offer(idKey):
     context={'idKey': idKey}
-    top10 = get_offers()
-
-    if top10:
-        t = (context['idKey'], )
-        db = get_db()
-        cur = db.execute('SELECT * FROM offers WHERE idKey = ? LIMIT 1', t)
-        #import pdb; pdb.set_trace()
-        offer = cur.fetchone()
+    top10 = get_saved_data('offers')
+    t = (context['idKey'], )
+    db = get_db()
+    cur = db.execute('SELECT * FROM offers WHERE idKey = ? LIMIT 1', t)
+    offer = cur.fetchone()
+    try:
         offer_data = list(offer) + [top10[str(offer[0])]]
-        return render_template("offer_details.html", detail=offer_data, **context)
-    else:
+    except (TypeError, KeyError):
         flash("Electric preferences need to be input before viewing offer details")
         return redirect("/")
+    else:
+        return render_template("offer_details.html", detail=offer_data, **context)
 
 @app.route('/save', methods=['GET', 'POST']) ##method only accesible if your post to it
 def save():
-    if 'session_id' in session:
-        pass
-    else:
-        session['session_id'] = os.urandom(10)
-
     if request.method == 'POST':
-        data = get_saved_data() #Check if a cookie already exists & retrieve it
+        data = get_saved_data('user') #Check if a cookie already exists & retrieve it
         user_input = dict(request.form.items())
         offers = avg_price(user_input)
         data.update(user_input) ##If the cookie exists, only update the values that have changed
@@ -149,7 +137,16 @@ def index():
     db = get_db()
     cur = db.execute('SELECT DISTINCT TduCompanyName from offers')
     tdus = cur.fetchall()
-    return render_template('index.html', saves=get_saved_data(), tdus=tdus)
+    return render_template('index.html', saves=get_saved_data('user'), tdus=tdus)
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def page_not_found(e):
+    return render_template('500.html'), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=False)
+    app.run()
+    #debug=True, use_reloader=False

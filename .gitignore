@@ -1,0 +1,12 @@
+#Secret stuff
+passwords.py
+
+#virtual machine
+mtp/
+
+#constantly changing db
+mypower.db
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]

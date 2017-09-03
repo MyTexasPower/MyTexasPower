@@ -1,9 +1,15 @@
 import os
 import sqlite3
 import csv
+from raven import Client
 from slack_alert import slack_alert
 import urllib.request
 from urllib.error import URLError, HTTPError, ContentTooShortError
+
+from passwords import SLACK_WEBHOOK_URL, SENTRY_DSN
+from slack_alert import slack_alert
+
+client = Client(SENTRY_DSN) #add debugging
 
 class DatabaseManager(object):
   def __init__(self, db):
@@ -70,7 +76,7 @@ def update_db():
             total_rows = len(dbmgr.fetchall())
         #COMMITING CHANGES AND CLOSING CONNECTION
         del dbmgr
-        slack_alert("MyTexasPower Database was updated.\n *Total # Rows:* {}".format(total_rows))
+        slack_alert("MyTexasPower Database was updated.\n*Total # Rows:* {}".format(total_rows), SLACK_WEBHOOK_URL)
         os.remove(csv_location)
         print("Database updated")
 
