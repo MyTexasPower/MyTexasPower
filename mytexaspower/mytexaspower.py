@@ -4,6 +4,7 @@ import operator
 import os
 import sqlite3
 import urllib.request
+from raven import Client
 
 from flask import Flask, request, session, g, redirect, make_response, url_for, abort, escape, render_template, flash
 from passwords import SENTRY_DSN

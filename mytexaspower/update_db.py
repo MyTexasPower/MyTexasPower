@@ -7,7 +7,6 @@ import urllib.request
 from urllib.error import URLError, HTTPError, ContentTooShortError
 
 from passwords import SLACK_WEBHOOK_URL, SENTRY_DSN
-from slack_alert import slack_alert
 
 client = Client(SENTRY_DSN) #add debugging
 
