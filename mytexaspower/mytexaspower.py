@@ -6,11 +6,11 @@ import sqlite3
 import urllib.request
 from raven import Client
 
-from flask import Flask, request, session, g, redirect, make_response, url_for, abort, escape, render_template, flash
+from flask import Flask, request, session, g, redirect, make_response, url_for, abort, escape, render_template, flash, send_from_directory
 from passwords import SENTRY_DSN
 
 client = Client(SENTRY_DSN) #add debugging
-app = Flask(__name__) # create application instance
+app = Flask(__name__, ) # create application instance
 app.config.from_object(__name__) # load confi from this file, app.py
 
 #default config
@@ -151,6 +151,11 @@ def page_not_found(e):
 @app.errorhandler(500)
 def page_not_found(e):
     return render_template('500.html'), 500
+
+@app.route('/robots.txt')
+@app.route('/sitemap.xml')
+def static_from_root():
+    return send_from_directory(app.static_folder, request.path[1:])
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=False)
