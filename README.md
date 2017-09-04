@@ -8,6 +8,8 @@
 </h1>
 <h4 align="center">A simple electric utility comparison tool for Texans</h4>
 
+![](https://thumbs.gfycat.com/HarmlessRemoteAoudad-size_restricted.gif)
+
 ## Key Features
 
 * Compare electric offers by estimated monthly cost
