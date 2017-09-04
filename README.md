@@ -8,7 +8,7 @@
 </h1>
 <h4 align="center">A simple electric utility comparison tool for Texans</h4>
 
-![](https://thumbs.gfycat.com/HarmlessRemoteAoudad-size_restricted.gif)
+![](https://thumbs.gfycat.com/HarmlessRemoteAoudad-small.gif)
 
 ## Key Features
 
