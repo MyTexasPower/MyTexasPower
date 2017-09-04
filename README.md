@@ -10,7 +10,7 @@
 
 <div align="center">
             
-![](https://gfycat.com/HarmlessRemoteAoudad)
+![](https://github.com/krisfield/MyTexasPower/blob/master/images/mytexaspower_search.gif)
 
 </div>
 
