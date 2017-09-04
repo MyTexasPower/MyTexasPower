@@ -10,7 +10,7 @@
 
 <div align="center">
             
-![](https://thumbs.gfycat.com/HarmlessRemoteAoudad-size_restricted.gif)
+![](https://gfycat.com/HarmlessRemoteAoudad)
 
 </div>
 
