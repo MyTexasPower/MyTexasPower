@@ -42,6 +42,44 @@ def get_db():
         g.sqlite_db = connect_db()
     return g.sqlite_db
 
+def compare_renewable(arg):
+    """Compares non-renewable offer to paying for a renewable plan"""
+    user_preferences = get_saved_data('user')
+    offer_id = arg[0]
+    percent_renewable = int(arg[12])
+    top_offers = get_saved_data('offers')
+
+    if percent_renewable != 100:
+        db = get_db()
+        t = (user_preferences["tdu"], user_preferences["contract"], 100, 'FALSE')
+        usage = int(user_preferences["usage"])
+
+        cur = db.execute('SELECT * FROM offers WHERE TduCompanyName=? AND TermValue >=? AND Renewable >=? AND MinUsageFeesCredits = ? AND kwh500 IS NOT NULL', t)
+        result = cur.fetchall()
+
+        user_offers = {}
+        for row in result:
+            kwh2000 = row[6]
+            kwh1000 = row[5]
+            kwh500 = row[4]
+            idkey = row[0]
+
+            if usage > 1000:
+                price = round(usage * kwh2000, 0)
+            elif usage > 500:
+                price = round(usage * kwh1000, 0)
+            else:
+                price = round(usage * kwh500, 0)
+
+            user_offers.update({idkey: price})
+
+        sorted_offer = sorted(user_offers.items(), key=operator.itemgetter(1))
+        sorted_offer = sorted_offer[:1]
+        sorted_offer = dict(sorted_offer)
+        return sorted_offer
+    else:
+        return {}
+
 @app.teardown_appcontext
 def close_db(error):
     """Closes the database again at the end of the request."""
@@ -53,6 +91,7 @@ def avg_price(user_preferences):
     db = get_db()
     t = (user_preferences["tdu"], user_preferences["contract"], user_preferences["renewable"], 'FALSE')
     usage = int(user_preferences["usage"])
+    usage_upper = usage * 1.25
 
     cur = db.execute('SELECT * FROM offers WHERE TduCompanyName=? AND TermValue >=? AND Renewable >=? AND MinUsageFeesCredits = ? AND kwh500 IS NOT NULL', t)
     result = cur.fetchall()
@@ -64,14 +103,28 @@ def avg_price(user_preferences):
         kwh500 = row[4]
         idkey = row[0]
 
-        if usage >= 1000:
-            price = round(((usage-1000) * kwh2000) + (500 * kwh1000) + (500 * kwh500), 0)
-        elif usage >= 500:
-            price = round(((usage-500) * kwh1000) + (500 * kwh500), 0)
+        if usage > 1000:
+            price = round(usage * kwh2000, 0)
+        elif usage > 500:
+            price = round(usage * kwh1000, 0)
         else:
             price = round(usage * kwh500, 0)
 
-        user_offers.update({idkey: price})
+        ##compare to an upper price to heelp filter out bad offers
+        if usage_upper > 1000:
+            price_upper = round(usage_upper * kwh2000, 0)
+        elif usage_upper > 500:
+            price_upper = round(usage_upper * kwh1000, 0)
+        else:
+            price_upper = round(usage_upper * kwh500, 0)
+
+        price_ratio = (price_upper - price)/price_upper
+
+        ##if prices jump by 50% with an increase usage of 25% then don't consider them
+        if price_ratio >= 0.50:
+            pass
+        else:
+            user_offers.update({idkey: price})
 
     sorted_offer = sorted(user_offers.items(), key=operator.itemgetter(1))
     sorted_offer = sorted_offer[:10]
@@ -113,7 +166,8 @@ def view_offer(idKey):
         flash("Electric preferences need to be input before viewing offer details")
         return redirect("/")
     else:
-        return render_template("offer_details.html", detail=offer_data, **context)
+        r_offer = compare_renewable(offer)
+        return render_template("offer_details.html", detail=offer_data, renewable=r_offer, **context)
 
 @app.route('/save', methods=['GET', 'POST']) ##method only accesible if your post to it
 def save():
@@ -158,4 +212,4 @@ def static_from_root():
     return send_from_directory(app.static_folder, request.path[1:])
 
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=False)
+    app.run(debug=True)

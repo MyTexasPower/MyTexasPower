@@ -30,6 +30,9 @@ class DatabaseManager(object):
   def fetchall(self):
     return self.cur.fetchall()
 
+  def fetchone(self):
+    return self.cur.fetchone()
+
   def __del__(self):
     self.conn.close()
 
@@ -73,9 +76,13 @@ def update_db():
             dbmgr.query('DELETE FROM offers WHERE "idKey"="END OF FILE";')
             dbmgr.query("SELECT * FROM offers")
             total_rows = len(dbmgr.fetchall())
+            dbmgr.query("SELECT Renewable, COUNT(*) FROM offers WHERE Renewable=100 GROUP BY Renewable")
+            clean_offers = dbmgr.fetchone()
+
+
         #COMMITING CHANGES AND CLOSING CONNECTION
         del dbmgr
-        slack_alert("MyTexasPower Database was updated.\n*Total # Rows:* {}".format(total_rows), SLACK_WEBHOOK_URL)
+        slack_alert("MyTexasPower Database was updated.\n*Total # Plans:* {} \n*Clean Plans:* {}".format(total_rows, clean_offers[1]), SLACK_WEBHOOK_URL)
         os.remove(csv_location)
         print("Database updated")
 

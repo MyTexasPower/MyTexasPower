@@ -60,6 +60,11 @@ body {
     color:#FAFAFA;
 }
 
+.green-box {
+    background: #6fdc6f;
+    padding: 0.1em;
+}
+
 .white-box{
     background: #FAFAFA;
     padding: 1em;
