@@ -26,6 +26,85 @@ Example calculation:<br>
 * rounded to nearest dollar
 </p>
 
+<h2>What makes MyTexasPower different form PowerToChoose.org?</h2>
+
+<p>To answer this question let's do a quick search on PowerToChoose.org for a power provider.</p>
+<p>The search parameters are as follows:</p>
+
+<p>
+<table class="pure-table pure-table-horizontal" align="center">
+    <thead>
+        <tr>
+            <th>Search Field</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td>TDU</td>
+            <td>CenterPoint Energy</td>
+        </tr>
+
+        <tr>
+            <td>Estimated Usage</td>
+            <td>1001-2000 kWh</td>
+        </tr>
+
+        <tr>
+            <td>Pricing and Billing</td>
+            <td>Plans Without Minimum Usage Fees/Credits</td>
+        </tr>
+        <tr>
+            <td>Plan Type</td>
+            <td>Fixed Rate</td>
+        </tr>
+        <tr>
+            <td>Renewable Energy</td>
+            <td>N/A</td>
+        </tr>
+        <tr>
+            <td>Electric Companies</td>
+            <td>All</td>
+        </tr>
+    </tbody>
+</table>
+</p>
+
+<img class="pure-img" src="/static/img/Power-To-Choose-Results.png" alt="PowerToChoose Results">
+
+<p>Wow! Those look like some great deals at $.039 per kWh, but are they? Let’s graph out the top ten offers from these search results and see what we have.</p>
+
+<img class="pure-img" src="/static/img/Energy-Plans-Actual-Price.png" alt="Actual Energy Prices">
+
+<p>The results from above were found by painstakingly looking through each plan’s Electricity Facts Label (EFL). Looks like all these plans in our top results start out at a flat/low rate up to 1000 kWh and then the jump up at an enormous cost to the consumer. See the providers have set their price points to show up at the top of PowerToChoose search results for the 1001-2000 kWh usage range and appear cheap but if you use even just 1001 kWh or energy your costs will sky rocket. Can you guess what the default usage search parameter is for PowerToChoose is?.... 1001-2000 kWhs!</p>
+
+<p>Since all these plans are compared using their avg price/kWh at 500 kWh/1000 kWh/2000 kWh let's graph each plan by their average price and see what we get.</p>
+
+<img class="pure-img" src="/static/img/Energy-Plans-Average-Price.png" alt="Average Energy Prices">
+
+<p>This is a mixed bag but we can point out some interesting points from this graph. First you can see that for these plans the prices for 0-1000 kWhs are way off. This is due to these plans having fixed prices for this range. You can note that the prices to show up correctly at 500 kWh and 1000 kWh which is what you would expect for average prices. Now looking at 1000 kWh+ the graph is starting to look a lot more familiar. We can see a big jump in prices shortly after 1000 kWhs, this is a clear indication of a “price cliff” plan.
+</p>
+
+<h3>How can we make this better?</h3>
+<ol>
+<li><b>Filter:</b> <br>
+Let’s filter out plans that use teaser rates around 500 kWh, 1000 kWh, and 2000 kWh. We can do this by projecting what your average monthly bill would be if your usage were to increase. We can then compare this projected price to determine if you are at risk of hitting a “price cliff”. A small increase in your usage should not result in a large increase in your bill, plans like these are likely to lead to surprise bills in the mail. MyTexasPower filters out plans that have large jumps in price near your specified average monthly usage.</li> <br>
+
+<li><b>Specify usage:</b> <br>
+PowerToChoose only allows users to specify usage ranges of 500-1000 kWh or 10001-2000 kWh rates whereas MyTexasPower allows you to specify your average use to the kWh.</li> <br>
+
+<li><b>Money talks:</b> <br>
+You should be able to compare plans by total price, not by avg price/kWH. This is why MyTexasPower displays estimated usage in dollars.</li>
+</ol>
+
+<h3>How could PowerToChoose make this even better for everyone?</h3>
+<p>
+Require companies to input the same information that they put in the EFL into the PowerToChoose website. Base charges, Price/kWh for certain range, etc should all be searchable data at PowerToChoose.org. This would allow any consumer to input their energy usage and see exactly how much each plan would cost them. Consumers need more transparency, companies can’t rely on foggy marketing to get business.
+
+Until PowerToChoose makes energy shopping more transparent for users, MyTexasPower will be working to help you avoid overpaying for your electricity.
+</p>
+
 <h2>Transparency</h2>
 <p>This site is open source and can be found at <a href="https://github.com/krisfield/MyTexasPower"> Github MyTexasPower repo </a>. We want this site to make finding an electric provider as straightforward as possible. If you have any comments on how to improve the site please send them to <a href="mailto:mytxpower@gmail.com?Subject=MyTexasPower%20Feedback" target="_top">mytxpower@gmail.com</a></p>
 </div>
